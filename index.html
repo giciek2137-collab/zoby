@@ -3,42 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoby App</title>
 
-  <title>Moja Aplikacja</title>
-
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
-
-  <!-- iOS -->
   <link rel="apple-touch-icon" href="icon-192.png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000000, #222);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 350px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    p {
+      opacity: 0.8;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #00ffcc;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Moja aplikacja działa 🚀</h1>
-  <p>Możesz dodać ją do ekranu głównego.</p>
-
-  <button onclick="installApp()" id="installBtn" style="display:none">
-    Dodaj do ekranu głównego
-  </button>
+  <div class="card">
+    <h1>Witaj w Zoby 🚀</h1>
+    <p>Aplikacja działa jak prawdziwa mobilna appka.</p>
+    <button onclick="pokaz()">Kliknij mnie</button>
+  </div>
 
   <script>
-    // rejestracja service worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
+    function pokaz() {
+      alert("Działa! 🎉");
     }
 
-    // popup instalacji (Android)
-    let deferredPrompt;
-
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById("installBtn").style.display = "block";
-    });
-
-    function installApp() {
-      deferredPrompt.prompt();
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
     }
   </script>
 
