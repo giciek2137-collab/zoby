@@ -1,3 +1,46 @@
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-<link rel="apple-touch-icon" href="icon-192.png">
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Moja Aplikacja</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+
+  <!-- iOS -->
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+  <h1>Moja aplikacja działa 🚀</h1>
+  <p>Możesz dodać ją do ekranu głównego.</p>
+
+  <button onclick="installApp()" id="installBtn" style="display:none">
+    Dodaj do ekranu głównego
+  </button>
+
+  <script>
+    // rejestracja service worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+
+    // popup instalacji (Android)
+    let deferredPrompt;
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById("installBtn").style.display = "block";
+    });
+
+    function installApp() {
+      deferredPrompt.prompt();
+    }
+  </script>
+
+</body>
+</html>
